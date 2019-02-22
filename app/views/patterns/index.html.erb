@@ -1,0 +1,12 @@
+<ul>
+<% @pattern.each do |pattern| %>
+    <li>
+      <%= pattern.name %>
+    </li>
+    <li>
+      <%= pattern.price %>
+    </li>
+<% end %>
+</ul>
+
+<%= button_to 'Scrape Patterns', patterns_path, method: :post %>
