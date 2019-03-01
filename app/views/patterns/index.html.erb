@@ -4,6 +4,15 @@
       <%= pattern.name %>
     </li>
     <li>
+      <%= pattern.designer %>
+    </li>
+    <li>
+      <%= link_to 'Get the pattern here!', "https://store.closetcasepatterns.com/#{pattern.link}" %>
+    </li>
+    <li>
+      <%= image_tag "http://#{pattern.picture}" %>
+    </li>
+    <li>
       <%= pattern.price %>
     </li>
 <% end %>
