@@ -1,4 +1,5 @@
-require "page_scraper"
+require 'closet_case'
+require 'tilly_and_the_buttons'
 
 class PatternsController < ApplicationController
 
@@ -19,7 +20,7 @@ class PatternsController < ApplicationController
     #   update the record found with scraped data
     # end
 
-    pattern_array.each do |name, price, designer, link, picture|
+    patterns_array.each do |name, price, designer, link, picture|
       Pattern.create(
         name: name,
         price: price,
@@ -32,29 +33,15 @@ class PatternsController < ApplicationController
       redirect_to patterns_path
   end
 
-  private
-
-  def pattern_array
-    pattern_name.zip(pattern_price, pattern_designer, pattern_link, pattern_picture)
+  def patterns_array
+    closet_case_scraper.pattern_array + tilly_and_the_buttons_scraper.pattern_array
   end
 
-  def pattern_name
-    @names ||= PageScraper.new.pattern_names
+  def closet_case_scraper
+    @closet_case ||= ClosetCase.new
   end
 
-  def pattern_price
-    @prices ||= PageScraper.new.pattern_prices
-  end
-
-  def pattern_designer
-    @designers ||= PageScraper.new.pattern_designers
-  end
-
-  def pattern_link
-    @links ||= PageScraper.new.pattern_links
-  end
-
-  def pattern_picture
-    @pictures ||= PageScraper.new.pattern_pictures
+  def tilly_and_the_buttons_scraper
+    @tilly_and_the_buttons ||= TillyAndTheButtons.new
   end
 end
