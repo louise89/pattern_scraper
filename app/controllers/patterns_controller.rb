@@ -14,12 +14,6 @@ class PatternsController < ApplicationController
   end
 
   def create
-    # extract {designer/name/price/link/picture}
-    # loop over data
-    #   with data find an existing entry in the db or create a new one based on designer/name as FK.
-    #   update the record found with scraped data
-    # end
-
     patterns_array.each do |name, price, designer, link, picture|
       Pattern.create(
         name: name,
